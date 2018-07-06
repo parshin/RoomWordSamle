@@ -10,10 +10,13 @@ public class Word {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "word")
-
     private String mWord;
+    public String getWord() {return this.mWord;}
 
-    public Word(@NonNull String word) {this.mWord = word;}
+    @ColumnInfo(name = "translate")
+    private String mTranslate;
+    public String getTranslate() {return this.mTranslate;}
 
-    public String getWord(){return this.mWord;}
+    public Word(@NonNull String word, String translate) {this.mWord = word; this.mTranslate = translate;}
+
 }
