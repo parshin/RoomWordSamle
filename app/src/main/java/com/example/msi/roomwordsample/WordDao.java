@@ -10,7 +10,7 @@ import java.util.List;
 @Dao
 public interface WordDao {
     @Insert
-    void insert(Word word);
+    void insert(Word word, Word translate);
 
     @Query("DELETE FROM word_table")
     void deleteAll();
