@@ -11,24 +11,30 @@ import android.widget.EditText;
 public class NewWordActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
+    public static final String EXTRA_REPLY_TRANSLATE = "com.example.android.translatelistsql.REPLY";
 
     private EditText mEditWordView;
+    private EditText mEditTranslateView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_word);
         mEditWordView = findViewById(R.id.edit_word);
+        mEditTranslateView = findViewById(R.id.edit_translate);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
-                if (TextUtils.isEmpty(mEditWordView.getText())) {
+                if (TextUtils.isEmpty(mEditWordView.getText()) &&
+                            TextUtils.isEmpty(mEditTranslateView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     String word = mEditWordView.getText().toString();
+                    String translate = mEditTranslateView.getText().toString();
                     replyIntent.putExtra(EXTRA_REPLY, word);
+                    replyIntent.putExtra(EXTRA_REPLY_TRANSLATE, translate);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();

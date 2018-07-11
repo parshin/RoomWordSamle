@@ -21,8 +21,8 @@ public class WordRepository {
         return mAllWords;
     }
 
-    public void insert (Word word, Word translate) {
-        new insertAsyncTask(mWordDao).execute(word, translate);
+    public void insert (Word word) {
+        new insertAsyncTask(mWordDao).execute(word);
     }
 
     private static class insertAsyncTask extends AsyncTask<Word, Void, Void> {
@@ -35,7 +35,7 @@ public class WordRepository {
 
         @Override
         protected Void doInBackground(final Word... params) {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.insert(params[0], params[1]);
             return null;
         }
     }
