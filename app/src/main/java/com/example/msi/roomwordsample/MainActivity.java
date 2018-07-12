@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY), data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
+            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY_WORD),
+                            data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
 //            Word translate = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
             mWordViewModel.insert(word);
         } else {
