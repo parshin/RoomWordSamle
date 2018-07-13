@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WordListAdapter.OnItemClicked {
 
     private WordViewModel mWordViewModel;
 
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         final WordListAdapter adapter = new WordListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setOnClick(this);
 
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
         mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
@@ -55,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+    }
 
-
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(getApplicationContext(),"Item Clicked", Toast.LENGTH_LONG).show();
     }
 
     @Override

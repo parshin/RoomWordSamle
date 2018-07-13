@@ -23,6 +23,11 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     private final LayoutInflater mInflater;
     private List<Word> mWords; // Cached copy of words
 
+    private OnItemClicked onClick;
+    public interface OnItemClicked {
+        void onItemClick(int position);
+    }
+
     WordListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
 
     @Override
@@ -32,7 +37,15 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     @Override
-    public void onBindViewHolder(WordViewHolder holder, int position) {
+    public void onBindViewHolder(WordViewHolder holder, final int position) {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onItemClick(position);
+            }
+        });
+
         if (mWords != null) {
             Word current = mWords.get(position);
             holder.wordItemView.setText(current.getWord() + " - " + current.getTranslate());
@@ -54,5 +67,10 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         if (mWords != null)
             return mWords.size();
         else return 0;
+    }
+
+    public void setOnClick(OnItemClicked onClick)
+    {
+        this.onClick=onClick;
     }
 }
