@@ -6,4 +6,7 @@
     <string name="hint_translate">Translate...</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="title_activity_word">WordActivity</string>
+    <string name="word_activity_text">word</string>
+    <string name="translate_activity_text">translate</string>
 </resources>

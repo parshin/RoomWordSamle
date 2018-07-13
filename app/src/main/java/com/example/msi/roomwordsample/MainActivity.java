@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewDebug;
 import android.widget.Toast;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getApplicationContext(),"Item Clicked", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), String.valueOf(position)+ " Item Clicked", Toast.LENGTH_LONG).show();
     }
 
     @Override
