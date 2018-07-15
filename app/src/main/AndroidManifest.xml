@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".NewWordActivity" />
         <activity
-            android:name=".WordActivity"
+            android:name=".EditWordActivity"
             android:label="@string/title_activity_word"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

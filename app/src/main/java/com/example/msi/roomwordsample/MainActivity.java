@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewDebug;
 import android.widget.Toast;
 
 import java.util.List;
@@ -24,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
     private WordViewModel mWordViewModel;
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int WORD_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,10 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getApplicationContext(), String.valueOf(position)+ " Item Clicked", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), String.valueOf(position)+ " Item Clicked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, EditWordActivity.class);
+        intent.setData(mWordViewModel.getWord(position));
+        startActivityForResult(intent, WORD_ACTIVITY_REQUEST_CODE);
     }
 
     @Override
@@ -94,6 +96,11 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
                             data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
 //            Word translate = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
             mWordViewModel.insert(word);
+        } else if (requestCode == WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
+            Toast.makeText(
+                    getApplicationContext(),
+                    "todo saving word",
+                    Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(
                     getApplicationContext(),
