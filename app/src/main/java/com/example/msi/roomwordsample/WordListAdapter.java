@@ -24,6 +24,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     private List<Word> mWords; // Cached copy of words
 
     private OnItemClicked onClick;
+
     public interface OnItemClicked {
         void onItemClick(int position);
     }
@@ -58,6 +59,10 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     void setWords(List<Word> words){
         mWords = words;
         notifyDataSetChanged();
+    }
+
+    public Word getWord(int position){
+        return mWords.get(position);
     }
 
     // getItemCount() is called many times, and when it is first called,
