@@ -1,5 +1,6 @@
 package com.example.msi.roomwordsample;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,8 @@ public class EditWordActivity extends AppCompatActivity {
     private EditText mEditWordView;
     private EditText mEditTranslateView;
 
+    private WordViewModel mWordViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +28,16 @@ public class EditWordActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position",0);
+        Word word = mWordViewModel.getWord(position);
+
         mEditWordView = findViewById(R.id.edit_word);
         mEditTranslateView = findViewById(R.id.edit_translate);
+        mEditWordView.setText(word.getWord());
+        mEditTranslateView.setText(word.getTranslate());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
