@@ -23,6 +23,10 @@ public class NewWordActivity extends AppCompatActivity {
         mEditWordView = findViewById(R.id.edit_new_word);
         mEditTranslateView = findViewById(R.id.edit_new_translate);
 
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position",0);
+        mEditWordView.setText(String.valueOf(position));
+
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements WordListAdapter.O
     @Override
     public void onItemClick(int position) {
 //        Toast.makeText(getApplicationContext(), String.valueOf(position)+ " Item Clicked", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this, EditWordActivity.class);
+        Intent intent = new Intent(MainActivity.this, NewWordActivity.class);
 //        intent.putExtra(mWordViewModel.getWord(position));
         intent.putExtra("position", position);
         startActivityForResult(intent, WORD_ACTIVITY_REQUEST_CODE);
