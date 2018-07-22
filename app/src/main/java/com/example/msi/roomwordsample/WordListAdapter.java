@@ -29,8 +29,11 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         void onItemClick(int position);
     }
 
-    WordListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    WordListAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
+    }
 
+    // Create new views
     @Override
     public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
@@ -48,7 +51,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         });
 
         if (mWords != null) {
-            Word current = mWords.get(position);
+//            Word current = mWords.get(position);
+            Word current = getWord(position);
             holder.wordItemView.setText(current.getWord() + " - " + current.getTranslate());
         } else {
             // Covers the case of data not being ready yet.
@@ -62,7 +66,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     public Word getWord(int position){
-        return mWords.get(position);
+        Word current = mWords.get(position);
+        return current;
     }
 
     // getItemCount() is called many times, and when it is first called,
