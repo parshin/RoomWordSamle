@@ -16,6 +16,8 @@ public class NewWordActivity extends AppCompatActivity {
     private EditText mEditWordView;
     private EditText mEditTranslateView;
 
+    private WordListAdapter mWordListAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,9 @@ public class NewWordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int position = intent.getIntExtra("position",0);
-        mEditWordView.setText(String.valueOf(position));
+        mWordListAdapter = new WordListAdapter(this);
+        Word word = mWordListAdapter.getWord(position);
+        mEditWordView.setText(word.getWord());
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
