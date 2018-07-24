@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     private final LayoutInflater mInflater;
     private List<Word> mWords; // Cached copy of words
-
     private OnItemClicked onClick;
 
     public interface OnItemClicked {
@@ -66,8 +66,18 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     public Word getWord(int position){
-        Word current = mWords.get(position);
-        return current;
+
+//        if (mWords != null) {
+            Word current = mWords.get(position);
+            return current;
+//        } else {
+//            return ;
+////            Toast.makeText(
+////                    this,
+////                    R.string.empty_not_saved,
+////                    Toast.LENGTH_LONG).show();
+//        }
+
     }
 
     // getItemCount() is called many times, and when it is first called,
