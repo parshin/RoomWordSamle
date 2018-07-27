@@ -1,6 +1,7 @@
 package com.example.msi.roomwordsample;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,11 @@ import java.util.List;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
+    private final LayoutInflater mInflater;
+    private List<Word> mWords; // Cached copy of words
+    private OnItemClicked onClick;
+    private Context mContext;
+
     class WordViewHolder extends RecyclerView.ViewHolder {
         private final TextView wordItemView;
 
@@ -21,16 +27,15 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         }
     }
 
-    private final LayoutInflater mInflater;
-    private List<Word> mWords; // Cached copy of words
-    private OnItemClicked onClick;
+
 
     public interface OnItemClicked {
-        void onItemClick(int position);
+//        void onItemClick(int position);
     }
 
     WordListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
+        mContext = context;
     }
 
     // Create new views
@@ -46,8 +51,14 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClick.onItemClick(position);
+//                onClick.onItemClick(position);
+
+                Intent intent = new Intent(mContext, NewWordActivity.class);
+                intent.putExtra("word", mWords.get(position).getWord());
+                intent.putExtra("translate", mWords.get(position).getTranslate());
+                mContext.startActivity(intent);
             }
+
         });
 
         if (mWords != null) {
