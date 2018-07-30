@@ -5,8 +5,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 @Entity(tableName = "word_table")
-public class Word {
+public class Word implements Serializable{
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "word")
