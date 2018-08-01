@@ -27,13 +27,10 @@ public class NewWordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Word word = (Word)intent.getSerializableExtra("word_object");
-//        String word = intent.getExtras().getString("word");
-//        String translate = intent.getExtras().getString("translate");
-//        int position = intent.getIntExtra("position",0);
-//        mWordListAdapter = new WordListAdapter(this);
-//        Word word = mWordListAdapter.getWord(position);
-        mEditWordView.setText(word.getWord());
-        mEditTranslateView.setText(word.getTranslate());
+        if (word != null) {
+            mEditWordView.setText(word.getWord());
+            mEditTranslateView.setText(word.getTranslate());
+        }
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
