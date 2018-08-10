@@ -19,11 +19,12 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     private Context mContext;
 
     class WordViewHolder extends RecyclerView.ViewHolder {
-        private final TextView wordItemView;
+        private final TextView wordItemView, translateItemView;
 
         private WordViewHolder(View itemView) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.textViewWord);
+            translateItemView = itemView.findViewById(R.id.textViewTranslate);
         }
     }
 
@@ -64,9 +65,9 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         });
 
         if (mWords != null) {
-//            Word current = mWords.get(position);
             Word current = getWord(position);
-            holder.wordItemView.setText(current.getWord() + " - " + current.getTranslate());
+            holder.wordItemView.setText(current.getWord());
+            holder.translateItemView.setText(current.getTranslate());
         } else {
             // Covers the case of data not being ready yet.
             holder.wordItemView.setText("No Word");
