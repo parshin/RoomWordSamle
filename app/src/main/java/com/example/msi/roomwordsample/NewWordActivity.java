@@ -49,5 +49,13 @@ public class NewWordActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+//        final Button gtranslate_btn = findViewById(R.id.button_google_translate);
+//        gtranslate_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
 }

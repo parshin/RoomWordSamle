@@ -6,9 +6,9 @@
 
     <EditText
         android:id="@+id/edit_new_word"
+        style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
         android:hint="@string/hint_word"
         android:inputType="textAutoComplete"
         android:padding="@dimen/small_padding"
@@ -18,9 +18,9 @@
 
     <EditText
         android:id="@+id/edit_new_translate"
+        style="@style/word_translate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
         android:hint="@string/hint_translate"
         android:inputType="textAutoComplete"
         android:padding="@dimen/small_padding"
@@ -36,4 +36,12 @@
         android:text="@string/button_save"
         android:textColor="@color/buttonLabel" />
 
+    <Button
+        android:id="@+id/button_google_translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/button_google_translate"
+        android:textColor="@color/buttonLabel"
+        android:padding="@dimen/big_padding"/>
 </LinearLayout>
