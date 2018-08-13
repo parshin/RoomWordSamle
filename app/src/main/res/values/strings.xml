@@ -10,4 +10,5 @@
     <string name="word_activity_text">word</string>
     <string name="translate_activity_text">translate</string>
     <string name="button_google_translate">get google translate</string>
+    <string name="button_get_translate">get translate</string>
 </resources>

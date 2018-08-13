@@ -36,6 +36,15 @@
         <!--android:text="@string/button_save"-->
         <!--android:textColor="@color/buttonLabel" />-->
     <!---->
+
+    <Button
+        android:id="@+id/button_get_translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/button_get_translate"
+        android:textColor="@color/buttonLabel"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_save"
         android:layout_width="wrap_content"
@@ -43,6 +52,11 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_done_black_24dp"/>
+
+    <TextView
+        android:id="@+id/response_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <!--<Button-->
         <!--android:id="@+id/button_google_translate"-->
