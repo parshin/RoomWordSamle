@@ -19,6 +19,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -131,12 +135,29 @@ public class NewWordActivity extends AppCompatActivity {
     private void getMiniCard(final String bearer){
         final TextView mTextView = findViewById(R.id.response_text);
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://developers.lingvolive.com/api/v1/Minicard?text=text&srcLang=1033&dstLang=1049";
+        mEditWordView = findViewById(R.id.edit_new_word);
+
+        String url = String.format("https://developers.lingvolive.com/api/v1/Minicard?text=%1$s&srcLang=1033&dstLang=1049", mEditWordView.getText());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        mEditTranslateView = findViewById(R.id.edit_new_translate);
+
                         mTextView.setText("Card is: "+ response.toString());
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String jsonTranslate = jsonObject.getString("Translation");
+                            JSONObject jsonObjectTranslate = new JSONObject(jsonTranslate);
+                            String translate = jsonObjectTranslate.getString("Translation");
+                            mEditTranslateView.setText(translate);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override
