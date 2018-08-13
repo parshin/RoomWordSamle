@@ -39,5 +39,5 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
 
     // google translate
-    implementation 'com.google.cloud:google-cloud-translate:1.35.0'
+//    implementation 'com.google.cloud:google-cloud-translate:1.35.0'
 }

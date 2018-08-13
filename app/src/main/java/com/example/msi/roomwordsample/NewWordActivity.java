@@ -1,6 +1,7 @@
 package com.example.msi.roomwordsample;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -32,12 +33,13 @@ public class NewWordActivity extends AppCompatActivity {
             mEditTranslateView.setText(word.getTranslate());
         }
 
-        final Button button = findViewById(R.id.button_save);
-        button.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab_save = findViewById(R.id.fab_save);
+        fab_save.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
                 if (TextUtils.isEmpty(mEditWordView.getText()) &&
-                            TextUtils.isEmpty(mEditTranslateView.getText())) {
+                        TextUtils.isEmpty(mEditTranslateView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     String word = mEditWordView.getText().toString();
@@ -49,6 +51,23 @@ public class NewWordActivity extends AppCompatActivity {
                 finish();
             }
         });
+//        final Button button = findViewById(R.id.button_save);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                Intent replyIntent = new Intent();
+//                if (TextUtils.isEmpty(mEditWordView.getText()) &&
+//                            TextUtils.isEmpty(mEditTranslateView.getText())) {
+//                    setResult(RESULT_CANCELED, replyIntent);
+//                } else {
+//                    String word = mEditWordView.getText().toString();
+//                    String translate = mEditTranslateView.getText().toString();
+//                    replyIntent.putExtra(EXTRA_REPLY_WORD, word);
+//                    replyIntent.putExtra(EXTRA_REPLY_TRANSLATE, translate);
+//                    setResult(RESULT_OK, replyIntent);
+//                }
+//                finish();
+//            }
+//        });
 
 //        final Button gtranslate_btn = findViewById(R.id.button_google_translate);
 //        gtranslate_btn.setOnClickListener(new View.OnClickListener() {

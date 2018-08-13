@@ -28,20 +28,28 @@
         android:layout_marginTop="@dimen/big_padding"
         android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
+    <!--<Button-->
+        <!--android:id="@+id/button_save"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:text="@string/button_save"-->
+        <!--android:textColor="@color/buttonLabel" />-->
+    <!---->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_save"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/button_save"
-        android:textColor="@color/buttonLabel" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_done_black_24dp"/>
 
-    <Button
-        android:id="@+id/button_google_translate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/button_google_translate"
-        android:textColor="@color/buttonLabel"
-        android:padding="@dimen/big_padding"/>
+    <!--<Button-->
+        <!--android:id="@+id/button_google_translate"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:text="@string/button_google_translate"-->
+        <!--android:textColor="@color/buttonLabel"-->
+        <!--android:padding="@dimen/big_padding"/>-->
 </LinearLayout>
