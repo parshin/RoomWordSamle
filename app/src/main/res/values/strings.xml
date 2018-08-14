@@ -11,4 +11,6 @@
     <string name="translate_activity_text">translate</string>
     <string name="button_google_translate">get google translate</string>
     <string name="button_get_translate">get translate</string>
+    <string name="title_activity_view_word">ViewWordActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

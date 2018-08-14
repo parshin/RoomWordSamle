@@ -54,7 +54,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             public void onClick(View v) {
 //                onClick.onItemClick(position);
 
-                Intent intent = new Intent(mContext, NewWordActivity.class);
+                Intent intent = new Intent(mContext, ViewWordActivity.class);
 //                intent.putExtra("word", mWords.get(position).getWord());
 //                intent.putExtra("translate", mWords.get(position).getTranslate());
                 Word current = getWord(position);
