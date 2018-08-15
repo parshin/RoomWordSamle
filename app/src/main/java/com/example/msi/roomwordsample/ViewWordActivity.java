@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.util.List;
+
 public class ViewWordActivity extends AppCompatActivity {
 
     /**
@@ -35,6 +37,7 @@ public class ViewWordActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +142,7 @@ public class ViewWordActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return 5;
         }
     }
 }
