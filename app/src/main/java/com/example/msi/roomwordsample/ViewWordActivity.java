@@ -1,5 +1,6 @@
 package com.example.msi.roomwordsample;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -38,6 +39,7 @@ public class ViewWordActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private WordViewModel mWordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,10 @@ public class ViewWordActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -131,6 +137,7 @@ public class ViewWordActivity extends AppCompatActivity {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+
         }
 
         @Override
