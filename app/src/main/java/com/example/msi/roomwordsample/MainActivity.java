@@ -102,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY_WORD),
-                            data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
+                            data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE),
+                            data.getStringExtra(NewWordActivity.EXTRA_REPLY_DEFINITION)
+            );
 //            Word translate = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY_TRANSLATE));
             mWordViewModel.insert(word);
         } else if (requestCode == WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){

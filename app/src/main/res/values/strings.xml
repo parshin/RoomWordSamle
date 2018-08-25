@@ -4,13 +4,15 @@
 
     <string name="hint_word">Word...</string>
     <string name="hint_translate">Translate...</string>
+    <string name="hint_definition">Definition...</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
     <string name="title_activity_word">WordActivity</string>
     <string name="word_activity_text">word</string>
     <string name="translate_activity_text">translate</string>
     <string name="button_google_translate">get google translate</string>
-    <string name="button_get_translate">get translate</string>
+    <string name="button_get_translate">get translate (lingvolive)</string>
+    <string name="button_get_definition">get definition (oxforddictionary)</string>
     <string name="title_activity_view_word">ViewWordActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 </resources>

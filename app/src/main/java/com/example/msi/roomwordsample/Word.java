@@ -25,9 +25,17 @@ public class Word implements Serializable{
         return this.mTranslate;
     }
 
-    public Word(@NonNull String word, String translate) {
+    @ColumnInfo(name = "definition")
+    private String mDefinition;
+
+    public String getmDefinition() {
+        return this.mDefinition;
+    }
+
+    public Word(@NonNull String word, String translate, String definition) {
         this.mWord = word;
         this.mTranslate = translate;
+        this.mDefinition = definition;
     }
 
     public int getId(){ return id; }

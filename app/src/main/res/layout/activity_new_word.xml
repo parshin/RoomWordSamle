@@ -16,6 +16,24 @@
         android:layout_marginTop="@dimen/big_padding"
         android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/button_get_translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/button_get_translate"
+        android:textColor="@color/buttonLabel" />
+
+    <Button
+        android:id="@+id/button_get_definition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:padding="6dp"
+        android:text="@string/button_get_definition"
+        android:textColor="@color/buttonLabel" />
+
     <EditText
         android:id="@+id/edit_new_translate"
         style="@style/word_translate"
@@ -28,22 +46,16 @@
         android:layout_marginTop="@dimen/big_padding"
         android:textSize="18sp" />
 
-    <!--<Button-->
-        <!--android:id="@+id/button_save"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:text="@string/button_save"-->
-        <!--android:textColor="@color/buttonLabel" />-->
-    <!---->
-
-    <Button
-        android:id="@+id/button_get_translate"
+    <TextView
+        android:id="@+id/text_definition"
+        style="@style/word_definition"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/button_get_translate"
-        android:textColor="@color/buttonLabel"/>
+        android:layout_height="215dp"
+        android:layout_marginBottom="@dimen/big_padding"
+        android:layout_marginTop="@dimen/big_padding"
+        android:hint="@string/hint_definition"
+        android:padding="@dimen/small_padding"
+        android:textSize="18sp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_save"
@@ -51,12 +63,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_done_black_24dp"/>
+        android:src="@drawable/ic_done_black_24dp" />
 
-    <TextView
-        android:id="@+id/response_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<TextView-->
+        <!--android:id="@+id/response_text"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
     <!--<Button-->
         <!--android:id="@+id/button_google_translate"-->

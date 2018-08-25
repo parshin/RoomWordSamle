@@ -2,6 +2,7 @@ package com.example.msi.roomwordsample;
 
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,16 +24,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class NewWordActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY_WORD = "com.example.android.wordlistsql.REPLY";
     public static final String EXTRA_REPLY_TRANSLATE = "com.example.android.translatelistsql.REPLY";
+    public static final String EXTRA_REPLY_DEFINITION = "com.example.android.definitionlistsql.REPLY";
 
     private EditText mEditWordView;
     private EditText mEditTranslateView;
+    private TextView mTextDefinition;
 
     private WordListAdapter mWordListAdapter;
 
@@ -68,43 +76,27 @@ public class NewWordActivity extends AppCompatActivity {
                 finish();
             }
         });
-//        final Button button = findViewById(R.id.button_save);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent replyIntent = new Intent();
-//                if (TextUtils.isEmpty(mEditWordView.getText()) &&
-//                            TextUtils.isEmpty(mEditTranslateView.getText())) {
-//                    setResult(RESULT_CANCELED, replyIntent);
-//                } else {
-//                    String word = mEditWordView.getText().toString();
-//                    String translate = mEditTranslateView.getText().toString();
-//                    replyIntent.putExtra(EXTRA_REPLY_WORD, word);
-//                    replyIntent.putExtra(EXTRA_REPLY_TRANSLATE, translate);
-//                    setResult(RESULT_OK, replyIntent);
-//                }
-//                finish();
-//            }
-//        });
 
-//        final Button gtranslate_btn = findViewById(R.id.button_google_translate);
-//        gtranslate_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-        final Button button_get_translate = findViewById(R.id.button_get_translate);
-        button_get_translate.setOnClickListener(new View.OnClickListener() {
+        final Button get_translate = findViewById(R.id.button_get_translate);
+        get_translate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 get_translate();
+            }
+        });
+
+        final Button get_definition = findViewById(R.id.button_get_definition);
+        get_definition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                get_definition();
             }
         });
     }
 
     private void get_translate(){
         // TODO: get Bearer token () once a day
-        final TextView mTextView = findViewById(R.id.response_text);
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://developers.lingvolive.com/api/v1.1/authenticate";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -116,7 +108,8 @@ public class NewWordActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mTextView.setText(error.getMessage());
+                // TODO show errors
+//                mTextView.setText(error.getMessage());
             }
         }) {
             @Override
@@ -132,8 +125,91 @@ public class NewWordActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    private void get_definition(){
+        new CallbackTask().execute(dictionaryEntries());
+    }
+
+    private String dictionaryEntries() {
+        mEditWordView = findViewById(R.id.edit_new_word);
+
+        final String language = "en";
+        final String word = mEditWordView.getText().toString();
+        final String word_id = word.toLowerCase(); //word id is case sensitive and lowercase is required
+        return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + word_id;
+    }
+
+    private class CallbackTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            final String app_id = "d00c02f0";
+            final String app_key = "35c0680f58a27f5852356f9c4d842f63";
+            try {
+                URL url = new URL(params[0]);
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                urlConnection.setRequestProperty("Accept","application/json");
+                urlConnection.setRequestProperty("app_id",app_id);
+                urlConnection.setRequestProperty("app_key",app_key);
+
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            int i, j, k, l;
+            String definition = "";
+
+            mTextDefinition = findViewById(R.id.text_definition);
+            String lineSep = System.getProperty("line.separator");
+
+            try {
+                JSONObject jsondef = new JSONObject(result);
+                JSONArray results = jsondef.getJSONArray("results");
+                for (i=0; i < results.length(); i++){
+                    JSONObject jresult = results.getJSONObject(i);
+                    JSONArray lexicalentries = jresult.getJSONArray("lexicalEntries");
+                    for (j=0; j < lexicalentries.length(); j++) {
+                        JSONObject jolentrie = lexicalentries.getJSONObject(j);
+                        JSONArray entries = jolentrie.getJSONArray("entries");
+                        for (k=0; k < entries.length(); k++) {
+                            JSONObject joentrie = entries.getJSONObject(k);
+                            JSONArray senses = joentrie.getJSONArray("senses");
+                            for (l=0; l < senses.length(); l++){
+                                JSONObject josenses = senses.getJSONObject(l);
+                                JSONArray definitions = josenses.getJSONArray("definitions");
+                                definition = definition + String.valueOf(l+1) + ". " + definitions.getString(0) + lineSep;
+                            }
+                        }
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            mTextDefinition.setText(definition);
+        }
+    }
+
     private void getMiniCard(final String bearer){
-        final TextView mTextView = findViewById(R.id.response_text);
+//        final TextView mTextView = findViewById(R.id.response_text);
         RequestQueue queue = Volley.newRequestQueue(this);
         mEditWordView = findViewById(R.id.edit_new_word);
 
@@ -144,7 +220,7 @@ public class NewWordActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         mEditTranslateView = findViewById(R.id.edit_new_translate);
 
-                        mTextView.setText("Card is: "+ response.toString());
+//                        mTextView.setText("Card is: "+ response.toString());
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -162,7 +238,7 @@ public class NewWordActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mTextView.setText(error.getMessage());
+//                mTextView.setText(error.getMessage());
             }
         }){
             @Override

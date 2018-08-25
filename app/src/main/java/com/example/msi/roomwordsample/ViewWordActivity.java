@@ -1,5 +1,6 @@
 package com.example.msi.roomwordsample;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,8 +39,9 @@ public class ViewWordActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
-    private WordViewModel mWordViewModel;
+    private List<Word> mWords;
+//    private List<Word> mWords;
+//    private WordViewModel mWordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,8 @@ public class ViewWordActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
-
-
+//        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+//        mWordViewModel.getAllWords()
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -135,6 +136,9 @@ public class ViewWordActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
+        private LiveData<List<Word>> mAllWords;
+        private WordViewModel mWordViewModel;
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
 
@@ -149,7 +153,9 @@ public class ViewWordActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 5;
+            if (mWords != null)
+                return mWords.size();
+            else return 0;
         }
     }
 }
