@@ -1,7 +1,10 @@
 package com.example.msi.roomwordsample;
 
+import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -41,7 +44,7 @@ public class ViewWordActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Word> mWords;
 //    private List<Word> mWords;
-//    private WordViewModel mWordViewModel;
+    private WordViewModel mWordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,6 @@ public class ViewWordActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
-//        mWordViewModel.getAllWords()
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -60,6 +61,16 @@ public class ViewWordActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+//        mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
+//            @Override
+//            public void onChanged(@Nullable final List<Word> words) {
+//                // Update the cached copy of the words in the adapter.
+//                mSectionsPagerAdapter.setWords(words);
+//            }
+//
+//        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.edit_word_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +116,10 @@ public class ViewWordActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+//        private WordRepository mRepository;
+
         public PlaceholderFragment() {
+//            mRepository = new WordRepository();
         }
 
         /**
@@ -136,12 +150,14 @@ public class ViewWordActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
-        private LiveData<List<Word>> mAllWords;
+//        private LiveData<List<Word>> mAllWords;
         private WordViewModel mWordViewModel;
+//        private WordRepository mRepository;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-
+//            mRepository = new WordRepository(this);
+            mWordViewModel = new WordViewModel(getApplication());
         }
 
         @Override
@@ -149,13 +165,17 @@ public class ViewWordActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
+
         }
 
         @Override
         public int getCount() {
-            if (mWords != null)
-                return mWords.size();
-            else return 0;
+//            return mWordViewModel.getWordsCount().getValue();
+//            mRepository.getWordsCount();
+//            if (mWords != null)
+//                return mWords.size();
+//            else return 0;
+            return 5;
         }
     }
 }

@@ -27,6 +27,7 @@ public class Word implements Serializable{
 
     @ColumnInfo(name = "definition")
     private String mDefinition;
+    public String getDefinition() { return this.mDefinition; }
 
     public String getmDefinition() {
         return this.mDefinition;

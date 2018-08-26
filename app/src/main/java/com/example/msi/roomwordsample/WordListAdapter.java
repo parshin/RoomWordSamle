@@ -28,8 +28,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         }
     }
 
-
-
     public interface OnItemClicked {
 //        void onItemClick(int position);
     }
@@ -80,18 +78,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     public Word getWord(int position){
-
-//        if (mWords != null) {
-            Word current = mWords.get(position);
-            return current;
-//        } else {
-//            return ;
-////            Toast.makeText(
-////                    this,
-////                    R.string.empty_not_saved,
-////                    Toast.LENGTH_LONG).show();
-//        }
-
+        Word current = mWords.get(position);
+        return current;
     }
 
     // getItemCount() is called many times, and when it is first called,

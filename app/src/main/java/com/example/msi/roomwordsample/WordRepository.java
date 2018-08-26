@@ -10,16 +10,20 @@ public class WordRepository {
 
     private WordDao mWordDao;
     private LiveData<List<Word>> mAllWords;
+    private LiveData<Integer> mWordsCount;
 
     WordRepository(Application application) {
         WordRoomDatabase db = WordRoomDatabase.getDatabase(application);
         mWordDao = db.wordDao();
         mAllWords = mWordDao.getAllWords();
+        mWordsCount = mWordDao.getDataCount();
     }
 
     LiveData<List<Word>> getAllWords() {
         return mAllWords;
     }
+
+    LiveData<Integer> getWordsCount() { return mWordsCount; }
 
     public void insert (Word word) {
         new insertAsyncTask(mWordDao).execute(word);
