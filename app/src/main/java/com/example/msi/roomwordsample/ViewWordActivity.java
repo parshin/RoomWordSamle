@@ -1,9 +1,12 @@
 package com.example.msi.roomwordsample;
 
 import android.app.Application;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,6 +48,7 @@ public class ViewWordActivity extends AppCompatActivity {
     private List<Word> mWords;
 //    private List<Word> mWords;
     private WordViewModel mWordViewModel;
+    private WordRepository mRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +65,6 @@ public class ViewWordActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
-//        mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
-//            @Override
-//            public void onChanged(@Nullable final List<Word> words) {
-//                // Update the cached copy of the words in the adapter.
-//                mSectionsPagerAdapter.setWords(words);
-//            }
-//
-//        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.edit_word_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -148,16 +142,15 @@ public class ViewWordActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter implements LifecycleOwner {
 
 //        private LiveData<List<Word>> mAllWords;
-        private WordViewModel mWordViewModel;
+//        private WordViewModel mWordViewModel;
 //        private WordRepository mRepository;
+        private int wordscount;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-//            mRepository = new WordRepository(this);
-            mWordViewModel = new WordViewModel(getApplication());
         }
 
         @Override
@@ -170,12 +163,19 @@ public class ViewWordActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-//            return mWordViewModel.getWordsCount().getValue();
-//            mRepository.getWordsCount();
-//            if (mWords != null)
-//                return mWords.size();
-//            else return 0;
-            return 5;
+//            return 5;
+//            mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+//            return mWordViewModel.getWordsCount();
+//            mRepository = new WordRepository(getApplication());
+//            final LiveData<List<Word>> wordslist = mRepository.getAllWords();
+
+            return wordscount;
+        }
+
+        @NonNull
+        @Override
+        public Lifecycle getLifecycle() {
+            return null;
         }
     }
 }

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.wordslist);
         final WordListAdapter adapter = new WordListAdapter(this);
 
-        // TODO how do that 2 strings work?
+        // TODO how do these 2 strings work?
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
